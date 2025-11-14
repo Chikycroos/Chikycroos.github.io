@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Corazón de San Valentín</title>
+    <style>
+        body {
+            /* Establece el fondo negro, similar a bgcolor("black") */
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Evita barras de desplazamiento */
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="heartCanvas"></canvas>
+
+    <script>
+        // Obtener el contexto 2D del lienzo
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Configurar el tamaño del canvas (se ajustará al centro de la pantalla)
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Establecer el color del trazo (similar a color("red"))
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 0.5; // Grosor de línea delgado
+
+        // **Funciones de la Curva Paramétrica**
+        // Equivalentes a hearta(k) y heartb(k)
+        function heartX(k) {
+            return 15 * Math.pow(Math.sin(k), 3);
+        }
+
+        function heartY(k) {
+            return 12 * Math.cos(k) - 5 * Math.cos(2 * k) - 2 * Math.cos(3 * k) - Math.cos(4 * k);
+        }
+
+        // **Parámetros de Dibujo**
+        const SCALE = 20; // Factor de escala (similar al *20 del código Python)
+        const ITERATIONS = 6000; // Número de puntos a dibujar (similar al range(6000))
+        
+        // El punto central (origen 0,0) en la pantalla
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        // Comenzar el dibujo
+        for (let i = 0; i < ITERATIONS; i++) {
+            // Calcular las coordenadas (x, y) del punto en el corazón
+            // El parámetro 'k' en JavaScript lo escalamos un poco para tener una curva más completa,
+            // pero mantenemos la esencia de usar 'i' como el parámetro.
+            const k = i * 0.01; // Ajuste del parámetro 'k' para una iteración más fina
+            
+            const x_coord = heartX(k) * SCALE;
+            const y_coord = heartY(k) * SCALE;
+            
+            // La coordenada Y se invierte (-y_coord) porque en gráficos de computadora
+            // el eje Y positivo va hacia abajo, y queremos que el corazón apunte hacia arriba.
+            const screenX = centerX + x_coord;
+            const screenY = centerY - y_coord;
+
+            // **Dibujo del Corazón y el efecto de "relleno"**
+            // Se dibuja una línea desde el punto (x, y) hasta el centro (0, 0)
+            
+            ctx.beginPath();
+            
+            // 1. Mover al punto en la periferia del corazón
+            ctx.moveTo(screenX, screenY);
+            
+            // 2. Dibujar una línea hasta el centro
+            ctx.lineTo(centerX, centerY);
+            
+            // Aplicar el trazo (esto equivale al `goto` y el `for j in range(5):` que dibuja la línea)
+            ctx.stroke();
+        }
+
+    </script>
+    
+</body>
+</html>

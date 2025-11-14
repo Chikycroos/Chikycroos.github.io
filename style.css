@@ -1,0 +1,18 @@
+/* Estilos para el cuerpo de la página */
+body {
+    /* Establece el fondo negro */
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    /* Evita barras de desplazamiento si el dibujo sale del área visible */
+    overflow: hidden; 
+}
+
+/* Estilos básicos para el canvas (opcional, pero ayuda a centrarlo) */
+#heartCanvas {
+    /* El canvas tomará el 100% del espacio disponible, lo cual ajustamos en JS */
+    display: block;
+}
