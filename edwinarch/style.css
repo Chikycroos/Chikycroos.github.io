@@ -1,0 +1,64 @@
+body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative; /* Necesario para posicionar las partículas */
+            perspective: 1000px; /* Para efectos 3D si se quisieran añadir */
+        }
+
+        /* Estilos para el texto principal */
+        #pulsating-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            position: relative; /* Para el z-index y el brillo */
+            z-index: 2; /* Asegura que el texto esté por encima de las partículas */
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.7),
+                         0 0 20px rgba(255, 0, 0, 0.5),
+                         0 0 30px rgba(255, 0, 0, 0.3); /* Efecto de brillo inicial */
+            animation: textGlow 1.5s infinite alternate; /* Animación de brillo */
+        }
+
+        /* Animación de brillo del texto */
+        @keyframes textGlow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.7),
+                             0 0 20px rgba(255, 0, 0, 0.5),
+                             0 0 30px rgba(255, 0, 0, 0.3);
+            }
+            to {
+                text-shadow: 0 0 15px rgba(255, 0, 0, 1),
+                             0 0 25px rgba(255, 0, 0, 0.8),
+                             0 0 40px rgba(255, 0, 0, 0.6);
+            }
+        }
+
+        /* Estilos para las partículas del fondo */
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5); /* Partículas blancas semitransparentes */
+            border-radius: 50%;
+            pointer-events: none; /* No interfieren con eventos del ratón */
+            animation: fadeAndMove 10s infinite; /* Animación de movimiento y desvanecimiento */
+        }
+
+        /* Animación de las partículas */
+        @keyframes fadeAndMove {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-50vh) scale(1.2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(0.5);
+            }
+        }
