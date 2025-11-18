@@ -1,11 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Corazón Animado</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Arley con mucho amor</title>
+    <style>
+        /* Estilos CSS para el fondo, centrado y texto */
+        body {
+            background-color: black; /* Fondo negro como en Turtle */
+            display: flex;
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            height: 100vh; /* Ocupar toda la altura de la ventana */
+            margin: 0;
+            overflow: hidden; /* Evitar barras de desplazamiento */
+            font-family: 'Arial', sans-serif;
+        }
+
+        #pulsating-message {
+            color: red; /* Color rojo como en Turtle */
+            font-weight: bold;
+            text-align: center;
+            /* La fuente inicial se establece en el JavaScript */
+            will-change: font-size; /* Sugerencia al navegador para optimizar la animación */
+        }
+    </style>
 </head>
 <body>
-    <canvas id="heartCanvas"></canvas> 
-    <script src="./js/script.js"></script>
+
+    <div id="pulsating-message">Te manda un beso shelly</div>
+
+    <script>
+        // Lógica de JavaScript para la animación de pulsación
+        const messageElement = document.getElementById('pulsating-message');
+        let startTime = Date.now(); // Obtener el tiempo de inicio en milisegundos
+
+        function updatePulsation() {
+            // Calcular el tiempo transcurrido en segundos
+            const elapsed = (Date.now() - startTime) / 1000;
+
+            // Factor de pulsación usando seno, replicando la lógica de Python:
+            // 1 + 0.5 * sin(tiempo * 3) -> oscila entre 0.5 y 1.5
+            const pulsationFactor = 1 + 0.5 * Math.sin(elapsed * 3);
+
+            // Calcular el tamaño de la fuente. La base es 50px, como en Python.
+            let fontSize = 50 * pulsationFactor;
+
+            // Aplicar límites (30px a 70px)
+            if (fontSize < 30) {
+                fontSize = 30;
+            } else if (fontSize > 70) {
+                fontSize = 70;
+            }
+
+            // Aplicar el nuevo tamaño de fuente al elemento HTML
+            messageElement.style.fontSize = `${fontSize}px`;
+
+            // Solicitar el siguiente frame de animación para una ejecución suave (mejor que time.sleep)
+            requestAnimationFrame(updatePulsation);
+        }
+
+        // Iniciar el bucle de animación
+        updatePulsation();
+    </script>
 </body>
 </html>
