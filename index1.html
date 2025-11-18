@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje para Shelly</title>
+    <style>
+        body {
+            display: flex; /* Para alinear elementos en fila */
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            min-height: 100vh; /* Ocupar toda la altura */
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            gap: 20px; /* Espacio entre la imagen y el texto */
+        }
+
+        .shelly-container {
+            display: flex;
+            align-items: center; 
+        }
+
+        .shelly-image {
+            width: 180px; /* Tamaño de la imagen */
+            height: auto; /* Mantener proporción */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            object-fit: contain; 
+        }
+
+        .love-text {
+            color: #8A2BE2; /* Morado */
+            font-size: 3em; 
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            white-space: nowrap; 
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 600px) {
+            body {
+                flex-direction: column; 
+            }
+            .love-text {
+                font-size: 2.5em; 
+            }
+            .shelly-image {
+                width: 150px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="shelly-container">
+        <img src="https://i.pinimg.com/originals/e8/9b/e7/e89be73680c6d2a5996295596f709d74.jpg" alt="Imagen de Shelly" class="shelly-image">
+    </div>
+
+    <div class="love-text">
+        Te amo
+    </div>
+
+</body>
+</html>
